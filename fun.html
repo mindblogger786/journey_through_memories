@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Fun Surprise</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <div class="container vh-100 d-flex flex-column justify-content-center align-items-center text-center" style="background: linear-gradient(to bottom, #e6f7ff, #ffffff);">
+        <h1 class="display-4 text-primary mb-4">Pop the Balloons!</h1>
+        <p class="fs-5 text-muted mb-4">Click on the balloons to pop them and reveal a message!</p>
+        <div class="balloon-container d-flex flex-wrap justify-content-center">
+            <div class="balloon mx-2 my-2" style="width: 80px; height: 100px; background-color: #ff9999; border-radius: 50%; cursor: pointer;" onclick="popBalloon(this)"></div>
+            <div class="balloon mx-2 my-2" style="width: 80px; height: 100px; background-color: #ffcc99; border-radius: 50%; cursor: pointer;" onclick="popBalloon(this)"></div>
+            <div class="balloon mx-2 my-2" style="width: 80px; height: 100px; background-color: #99ccff; border-radius: 50%; cursor: pointer;" onclick="popBalloon(this)"></div>
+            <div class="balloon mx-2 my-2" style="width: 80px; height: 100px; background-color: #e099ff; border-radius: 50%; cursor: pointer;" onclick="popBalloon(this)"></div>
+            <!-- Add more balloons as needed -->
+        </div>
+        <p id="reveal-message" class="fs-4 text-success mt-4" style="display: none;">You popped all the balloons! I love you so much meri jaan 😘💕</p>
+        <div class="mt-4">
+            <a href="index.html" class="btn btn-primary">Go Back to Start</a>
+        </div>
+    </div>
+
+    <script>
+        let messages = [
+            "You are so kind and thoughtful!",
+            "Your smile lights up my world!",
+            "You are absolutely adorable!",
+            "You make everything better just by being here!"
+        ];
+
+        function popBalloon(balloon) {
+            balloon.style.display = 'none';
+            const remainingBalloons = document.querySelectorAll('.balloon');
+            const messageIndex = Math.floor(Math.random() * messages.length);
+            const praiseMessage = document.createElement('p');
+            praiseMessage.className = 'fs-5 text-muted mt-2';
+            praiseMessage.textContent = messages[messageIndex];
+            document.querySelector('.balloon-container').insertAdjacentElement('beforebegin', praiseMessage);
+
+            const visibleBalloons = Array.from(remainingBalloons).filter(b => b.style.display !== 'none');
+            if (visibleBalloons.length === 0) {
+                document.getElementById('reveal-message').style.display = 'block';
+            }
+        }
+    </script>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.bundle.min.js"></script>
+</body>
+</html>
